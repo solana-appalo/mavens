@@ -31,9 +31,9 @@ export const Mappingpage = () => {
             defaultValue=""
             variant="filled"
           />
-          <br></br>
-          <br></br>
-           <Button style={{minWidth:"20px",minHeight:"30px" }} className="click" variant="contained">SAVE</Button>
+          {/* <br></br>
+          <br></br> */}
+           <Button style={{minWidth:"20px",minHeight:"10px" }} className="click" variant="contained">SAVE</Button>
         <br></br>
         <br></br>
         </div>
@@ -65,4 +65,3 @@ export const Mappingpage = () => {
   );
 };
 export default Mappingpage;
-// hello
