@@ -9,16 +9,16 @@ import Viewdoctors from "../mappingpages/Viewdoctors"
 
 export default function Popuppage() {
 
-  const [serial_number, setSerial_number] = useState();
-  const [doctorname, setDoctorname] = useState();
-  const [workspace, setWorkspace] = useState();
-  const [speciality, setSpeciality] = useState();
-  const [status, setStatus] = useState();
-  const [street_name, setStreet_name] = useState();
-  const [area, setArea] = useState();
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
-  const [pincode, setPincode] = useState();
+  const [serial_number, setserial_number] = useState();
+  const [doctorname, setdoctorname] = useState();
+  const [workspace, setworkspace] = useState();
+  const [speciality, setspeciality] = useState();
+  const [status, setstatus] = useState();
+  const [street_name, setstreet_name] = useState();
+  const [area, setarea] = useState();
+  const [city, setcity] = useState();
+  const [state, setstate] = useState();
+  const [pincode, setpincode] = useState();
 
 
   const handleSubmit = async e => {
@@ -76,70 +76,70 @@ return (
                     label="SERIAL ID:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setSerial_number(e.target.value)}
+                    onChange={e => setserial_number(e.target.value)}
                   />
                   <TextField
                     id="doctorname"
                     label="DOCTOR NAME:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setDoctorname(e.target.value)}
+                    onChange={e => setdoctorname(e.target.value)}
                   />
                   <TextField
                     id="workspace"
                     label="WORKSPACE:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setWorkspace(e.target.value)}
+                    onChange={e => setworkspace(e.target.value)}
                   />
                   <TextField
                     id="speciality"
                     label="SPECIALTY:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setSpeciality(e.target.value)}
+                    onChange={e => setspeciality(e.target.value)}
                   />
                   <TextField
                     id="status"
                     label="STATUS:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setStatus(e.target.value)}
+                    onChange={e => setstatus(e.target.value)}
                   />
                   <TextField
                     id="street_name"
                     label="STREET NAME:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setStreet_name(e.target.value)}
+                    onChange={e => setstreet_name(e.target.value)}
                   />
                   <TextField
                     id="area"
                     label="AREA:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setArea(e.target.value)}
+                    onChange={e => setarea(e.target.value)}
                   />
                   <TextField
                     id="city"
                     label="CITY:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setCity(e.target.value)}
+                    onChange={e => setcity(e.target.value)}
                   />
                   <TextField
                     id="state"
                     label="STATE:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setState(e.target.value)}
+                    onChange={e => setstate(e.target.value)}
                   />
                   <TextField
                     id="pincode"
                     label="PINCODE:"
                     defaultValue=""
                     variant="filled"
-                    onChange={e => setPincode(e.target.value)}
+                    onChange={e => setpincode(e.target.value)}
                   />
                 </div>
               </Box>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-function DoctorAPI() {
+function Listdoct() {
   const [Doctors, setDoctors] = useState([]);
 
   const getDoctors = async () => {
@@ -19,4 +19,4 @@ function DoctorAPI() {
   };
 }
 
-export default DoctorAPI;
+export default Listdoct;

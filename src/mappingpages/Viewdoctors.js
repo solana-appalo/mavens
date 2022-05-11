@@ -5,10 +5,10 @@ import Viewdoct from "./Viewdoct";
 import {Container} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import {useState, useEffect} from "react";
-import DoctorAPI from "../api/Listdoct";
+import Listdoct from "../api/Listdoct";
 
 export default function Doctor (){
-  const [Doctors] = DoctorAPI.Doctor;
+  const [Doctors] = Listdoct.Doctor;
 
   return (
     <Container>
