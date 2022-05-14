@@ -5,8 +5,32 @@ import "../Styles/homestyle.css"
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Listdoct from "../api/Listdoct";
 
 export const Mappingpage = () => {
+ 
+  const [Doctors] = Listdoct.Doctor;
+  // const [serial_number, setserial_number] = useState();
+  const [doctorname, setdoctorname] = useState();
+  const [workspace, setworkspace] = useState();
+  const [speciality, setspeciality] = useState();
+  // const [status, setstatus] = useState();
+  // const [street_name, setstreet_name] = useState();
+  const [area, setarea] = useState();
+  // const [city, setcity] = useState();
+  // const [state, setstate] = useState();
+  // const [pincode, setpincode] = useState();
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    const token = await Mappage({  
+      doctorname,
+      area,
+      workspace,
+      speciality,
+    });
+  }
+
   return (
     <div>
       <Box
@@ -21,13 +45,13 @@ export const Mappingpage = () => {
           <h1>DOCTOR EMPLOYEE MAPPING</h1>
           <TextField
             id="filled-required"
-            label="EMPLOYEE ID:"
+            label="USER ID:"
             defaultValue=""
             variant="filled"
           />
           <TextField
             id="filled-required"
-            label="EMPLOYEE NAME:"
+            label="DOCTOR ID:"
             defaultValue=""
             variant="filled"
           />
@@ -48,20 +72,31 @@ export const Mappingpage = () => {
             <th> </th>
           </tr>
           <tr>
-            <td>Sols</td>
-            <td>Cardiac</td>
-            <td>Germany</td>
-            <td>Hospital</td>
-            <td>
-              <label class="cont">
+          <td>{Doctors.doctorname}</td>
+          <td>{Doctors.speciality}</td>
+          <td>{Doctors.area}</td>
+          <td>{Doctors.workspace}</td>
+          <td>
+          <label class="cont">
                 <input type="checkbox" />
                 <span class="check"></span>
               </label>
-            </td>
-          </tr>
+          </td>
+        </tr>
         </table>
       </div>
     </div>
   );
 };
+
+async function Mappage(credentials) {
+  return fetch('localhost:8080/map/getmappingdetails', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
 export default Mappingpage;

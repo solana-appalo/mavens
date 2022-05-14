@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,43 +25,70 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 //   );
 // }
 
-
-async function loginUser(credentials) {
-  return fetch('', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
- 
+// async function loginUser(credentials) {
+//   return fetch('', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(credentials)
+//   })
+//     .then(data => data.json())
+//  }
 
 
 
+function display(form) {
+  console.log(form.email);
+  console.log(form.password);
+  if (form.email === "root") {
+    if (form.password ==="root") {
+      
+    window.location.href = '/Homepage2'
+    } else {
+      alert("Invalid Password");
+    }
+  } else {
+    alert("Invalid Username");
+  }
+}
 
 const theme = createTheme();
 
 export default function SignIn() {
-  
-  const [email, setemail] = useState();
-const [password, setPassword] = useState();
+  //   const [email, setemail] = useState();
+  // const [password, setPassword] = useState();
 
-const handleSubmit = async e => {
-  e.preventDefault();
-  const token = await loginUser({
-    password,
-    email
-  });
-  window.location.href = '/'
-}
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const token = await loginUser({
+  //     password,
+  //     email
+  //   });
+  //   window.location.href = '/'
+  // }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (email === "root") {
+      if (password ==="root") {
+        
+      window.location.href = '/Home2'
+      } else {
+        alert("Invalid Password");
+      }
+    } else {
+      alert("Invalid Username");
+    }
+    }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
+        <Box onSubmit={handleSubmit}
           sx={{
             marginTop: 8,
             display: "flex",
@@ -78,7 +105,7 @@ const handleSubmit = async e => {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            
             noValidate
             sx={{ mt: 1 }}
           >
@@ -91,7 +118,7 @@ const handleSubmit = async e => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={e => setemail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -113,6 +140,7 @@ const handleSubmit = async e => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // onClick={display(this.form)}
             >
               Sign In
             </Button>
@@ -130,8 +158,9 @@ const handleSubmit = async e => {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
     </ThemeProvider>
   );
 }
+
+

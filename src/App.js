@@ -6,6 +6,7 @@ import Popuppage from './Pages/Popuppage';
 import Homepage2 from './Pages/Homepage2';
 import Mappingpage from './Pages/Mappingpage';
 
+
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
      <Route exact path="/pop" element={<Popuppage/>}></Route>
      <Route exact path="/home2" element={<Homepage2/>}></Route>
      <Route exact path="/map" element={<Mappingpage/>}></Route>
+    
      </Routes>
     </div>
   );

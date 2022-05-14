@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Listdoct from "../api/Listdoct";
 import Viewdoctors from "../mappingpages/Viewdoctors"
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 
 
 export default function Popuppage() {
