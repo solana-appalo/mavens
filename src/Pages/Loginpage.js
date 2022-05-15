@@ -13,60 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// function Copyright(props) {//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
-// async function loginUser(credentials) {
-//   return fetch('', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(credentials)
-//   })
-//     .then(data => data.json())
-//  }
-
-
-
-function display(form) {
-  console.log(form.email);
-  console.log(form.password);
-  if (form.email === "root") {
-    if (form.password ==="root") {
-      
-    window.location.href = '/Homepage2'
-    } else {
-      alert("Invalid Password");
-    }
-  } else {
-    alert("Invalid Username");
-  }
-}
-
 const theme = createTheme();
 
 export default function SignIn() {
-  //   const [email, setemail] = useState();
-  // const [password, setPassword] = useState();
-
-  // const handleSubmit = async e => {
-  //   e.preventDefault();
-  //   const token = await loginUser({
-  //     password,
-  //     email
-  //   });
-  //   window.location.href = '/'
-  // }
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
