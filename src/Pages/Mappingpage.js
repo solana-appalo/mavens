@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Popup from "./Popup";
 import "../Styles/Liststyle.css";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Button from "@mui/material/Button";
-
-import { render } from "@testing-library/react";
 
 function Mappingpage() {
   const [isOpen, setIsOpen] = useState(false);
   const [doctors,setdoctorname] = useState([])
+  const [doctors2,setdoctorname2] = useState([])
   const [serial_number, setserial_number] = useState("");
   const [area, setarea] = useState("");
   const [doctorname, setdoctor] = useState("");
   const [speciality, setspeciality] = useState("");
   const [workspace, setworkspace] = useState("");
-  const [serialnumber, setserialnumber] = useState("");
-  
+  const [user_id, setuser_id] = useState("");
+  const [doctor_id, setdoctor_id] = useState("");
+  const [doctor_name, setdoctor_name] = useState("");
+  // const [serialnumber, setserialnumber] = useState("");
 
   
   useEffect(() => {
@@ -37,48 +35,74 @@ function Mappingpage() {
   getdoctors();
 },[]);
 
+useEffect(() => {
+  const mappeddoctors = async () => {
+    const res2 = await fetch("localhost:8080/mapping/getmapdetails");
+    const getdata2 = await res2.json();
+    setdoctorname2(getdata2);
+    setuser_id(getdata2.user_id);
+    setdoctor_id(getdata2.doctor_id);
+    setdoctor_name(getdata2.doctor_name);
+    
+    // console.log(getdata);
+};
+mappeddoctors();
+},[]);
 
-  async function getdoctors(item) {
-    return fetch('http://localhost:8080/doctor/getdoctordetails', {
-      method: ' GET',
-      headers: {
-        'Accept':'application/json',
-        'Content-Type': 'application/json'
-      },
+  // async function mappeddoctors(item) {
+  //   return fetch('localhost:8080/mapping/getmapdetails', {
+  //     method: ' GET',
+  //     headers: {
+  //       'Accept':'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
       
-      body: JSON.stringify(item)
-    })
-      .then(data => data.json())
-   }
+  //     body: JSON.stringify(item)
+  //   })
+  //     .then(data => data.json())
+  //  }
 
-  function updatedoctor()
-  {
-    let item={doctorname,serial_number,speciality,area,workspace,}
-    console.warn("item",item)
-    fetch(`http://localhost:8080/doctor/doctordetails/${serial_number}`, {
-      method: 'PUT',
-      headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(item)
-    }).then((result) => {
-      result.json().then((resp) => {
-        console.warn(resp)
-        getdoctors(item.doctorname)
-      })
-    })
-  }
+  // function updatedoctor()
+  // {
+  //   let item={doctorname,serial_number,speciality,area,workspace,}
+  //   console.warn("item",item)
+  //   fetch(`http://localhost:8080/doctor/doctordetails/${serial_number}`, {
+  //     method: 'PUT',
+  //     headers:{
+  //       'Accept':'application/json',
+  //       'Content-Type':'application/json'
+  //     },
+  //     body:JSON.stringify(item)
+  //   }).then((result) => {
+  //     result.json().then((resp) => {
+  //       console.warn(resp)
+  //       getdoctors(item.doctorname)
+  //     })
+  //   })
+  // }
 
   const handleSubmit2 = () => {
     table({
-      serial_number,
-      serialnumber
+      user_id,
+      doctor_id,
+      doctor_name
     });
   }
 
-  async function table(credentials) {
-    return fetch('localhost:8080/event/eventdetails', {
+  // async function table(credentials) {
+  //   return fetch('localhost:8080/map/mapdoctors', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(credentials)
+  //   })
+  //     .then(data => data.json())
+  //     .then(data => this.setserialnumber({ serialnumber:data.user.serialnumber }))
+  //     .then(data => this.setserial_number({ serial_number:data.doctor.serial_number }));
+  //  }
+   async function table(credentials) {
+    return fetch('localhost:8080/mapping/mappingdoctors', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -90,7 +114,7 @@ function Mappingpage() {
 
   return (
     <div>
-      {/* <input type="button" value="Click to Open Popup" onClick={togglePopup} /> */}
+
       
       <Box
         component="form"
@@ -103,21 +127,26 @@ function Mappingpage() {
         <div>
           <h1>DOCTOR EMPLOYEE MAPPING</h1>
           <TextField
-            id="serialnumber"
+            id="user_id"
             label="USER ID:"
             defaultValue=""
             variant="filled"
-            // onChange={e => setserialnumber(e.target.value)}
+            onChange={e => setuser_id(e.target.value)}
           />
           <TextField
-            id="serial_number"
+            id="doctor_id"
             label="DOCTOR ID:"
             defaultValue=""
             variant="filled"
-            // onChange={e => setserial_number(e.target.value)}
+            onChange={e => setdoctor_id(e.target.value)}
           />
-          {/* <br></br>
-          <br></br> */}
+           <TextField
+            id="doctor_name"
+            label="DOCTOR NAME:"
+            defaultValue=""
+            variant="filled"
+            onChange={e => setdoctor_name(e.target.value)}
+          />
            <Button style={{minWidth:"20px",minHeight:"10px" }} 
            onClick={() => { handleSubmit2();}}
            className="click" variant="contained">SAVE</Button>
@@ -149,70 +178,36 @@ function Mappingpage() {
         </tbody>
        
       </table>
-      {isOpen && (
-        <Popup
-          content={
-            <>
-            <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div>
-        <TextField
-          id="filled-required"
-          label="SERIAL NUMBER:"
-          value={serial_number}
-          onChange={(e)=>{setserialnumber(e.target.value)}}
-          defaultValue=""
-          variant="filled"
-        />
-         <TextField
-          id="filled-required"
-          label="DOCTOR NAME:"
-          value={doctorname}
-          onChange={(e)=>{setdoctor(e.target.value)}}
-          defaultValue=""
-          variant="filled"
-        />
-         
-         <TextField
-          id="filled-required"
-          label="SPECIALITY:"
-          value={speciality}
-          onChange={(e)=>{setspeciality(e.target.value)}}
-          defaultValue=""
-          variant="filled"
-        />
-        
-         <TextField
-          id="filled-required"
-          label="AREA:"
-          value={area}
-          onChange={(e)=>{setarea(e.target.value)}}
-          defaultValue=""
-          variant="filled"
-        />
-         <TextField
-          id="filled-required"
-          label="WORKSPACE:"
-          value={workspace}
-          onChange={(e)=>{setworkspace(e.target.value)}}
-          defaultValue=""
-          variant="filled"
-        />
-      </div>
-    </Box>
-      <button onClick={updatedoctor} >Update User</button> 
-            </>
+    <div>
+    <h1>MAPPING DETAILS</h1>
+    <table id="customers">
+        <tbody>
+        <tr>
+            <th>USER ID</th>
+            <th>DOCTOR ID</th>
+            <th>DOCTOR NAME</th>
+      
+          </tr>
+          {
+            doctors2.map((item, i) =>
+            <tr key={i}>
+              <td>{item.user_id}</td>
+              <td>{item.doctor_id}</td>
+              <td>{item.doctor_name}</td>
+    
+            </tr>
+             )
           }
-        />
-      )}
+        </tbody>
+       
+      </table>
+      
+    </div>
+  
     </div>
   );
+
+
 }
 
 export default Mappingpage;
